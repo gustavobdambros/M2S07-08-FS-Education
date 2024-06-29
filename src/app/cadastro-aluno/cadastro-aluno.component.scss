@@ -1,0 +1,90 @@
+$primary-color: #3498db;
+$secondary-color: #e74c3c;
+$error-color: #e74c3c;
+$background-color: #faebd7;
+$container-background-color: #ffdead;
+$text-color: #333;
+$font-family: "Open Sans", sans-serif;
+
+// Estilos para o componente cadastro-aluno
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $background-color;
+  padding: 2rem;
+
+  h2 {
+    color: $primary-color;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-family: $font-family;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  form {
+    background: $container-background-color;
+    padding: 2rem;
+    border: 1.5px solid gray;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+
+    label {
+      display: block;
+      margin-bottom: 0.1rem;
+      font-weight: 500;
+      color: $text-color;
+      font-size: 1.2rem;
+      opacity: 0.8;
+      font-family: $font-family;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 1rem;
+      box-sizing: border-box;
+      border: 1.5px solid gray;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: $text-color;
+      font-family: $font-family;
+      margin-bottom: 0.5rem; /* Espaço entre inputs */
+
+      &:focus {
+        border-color: $primary-color;
+      }
+    }
+
+    button[type="submit"] {
+      padding: 1rem;
+      margin-top: 1rem;
+      width: 100%;
+      border: 1.5px solid gray;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      color: $text-color;
+      background-color: $primary-color;
+      transition: background-color 0.3s, transform 0.3s;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+        transform: scale(1.05);
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
