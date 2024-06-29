@@ -7,7 +7,6 @@ $text-color: #333;
 
 $font-family: "Open Sans", sans-serif;
 
-// Estilos para o componente cadastro-aluno
 .container {
   display: flex;
   flex-direction: column;
@@ -56,7 +55,7 @@ $font-family: "Open Sans", sans-serif;
       font-size: 1rem;
       color: $text-color;
       font-family: $font-family;
-      margin-bottom: 0.5rem; /* Espaço entre inputs */
+      margin-bottom: 0.5rem;
 
       &:focus {
         border-color: $primary-color;

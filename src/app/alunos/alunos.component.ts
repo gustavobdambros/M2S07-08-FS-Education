@@ -65,7 +65,6 @@ export class AlunosComponent implements OnInit {
 
   searchAlunos(): void {
     if (!this.termoPesquisa.trim()) {
-      // Se o termo de pesquisa estiver vazio, retorna todos os alunos
       this.getAlunos();
     } else {
       this.alunos = this.alunos.filter(
@@ -77,10 +76,7 @@ export class AlunosComponent implements OnInit {
   }
 
   getAlunos(): void {
-    // Simulando uma requisição assíncrona, substitua pelo seu código real de busca de alunos
     setTimeout(() => {
-      // Aqui você faria a chamada real ao serviço ou API para buscar os alunos
-      // Por simplicidade, estamos apenas definindo os alunos novamente
       this.alunos = [
         {
           id: 1,
@@ -96,9 +92,8 @@ export class AlunosComponent implements OnInit {
           email: 'maria@example.com',
           curso: 'Administração',
         },
-        // Adicione mais alunos conforme necessário
       ];
-    }, 500); // Simula um pequeno delay de 500ms
+    }, 500);
   }
 
   deleteAluno(id: number): void {
@@ -111,7 +106,6 @@ export class AlunosComponent implements OnInit {
   }
 
   editarAluno(id: number): void {
-    // Navega para a rota de cadastro-aluno com o ID do aluno
     this.router.navigate(['/cadastro-aluno', id]);
   }
 }
