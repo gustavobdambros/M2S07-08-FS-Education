@@ -27,6 +27,7 @@ export const routes: Routes = [
     path: 'cadastro-aluno',
     component: CadastroAlunoComponent,
   },
+  { path: 'cadastro-aluno/:id', component: CadastroAlunoComponent },
   {
     path: 'disciplinas',
     component: DisciplinasComponent,
