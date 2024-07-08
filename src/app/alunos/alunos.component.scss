@@ -35,22 +35,6 @@ $font-family: "Open Sans", sans-serif;
       font-size: 1rem;
       width: 20rem;
     }
-
-    button {
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      color: white;
-      background-color: $primary-color;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: darken($primary-color, 10%);
-      }
-    }
   }
 
   table {
@@ -70,12 +54,10 @@ $font-family: "Open Sans", sans-serif;
       background-color: $container-background-color;
       color: $primary-color;
       font-weight: bold;
-      color: $text-color;
     }
 
     td {
       background-color: $container-background-color;
-      color: $text-color;
     }
 
     .actions {
@@ -89,7 +71,6 @@ $font-family: "Open Sans", sans-serif;
         cursor: pointer;
         color: white;
         transition: background-color 0.3s;
-        margin-bottom: 0.5rem;
 
         &.edit {
           background-color: $primary-color;

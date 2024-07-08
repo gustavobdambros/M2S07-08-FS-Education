@@ -1,59 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface Aluno {
-  id: number;
-  nome: string;
+  id: string;
+  nomeCompleto: string;
   cpf: string;
   email: string;
+  celular: string;
   curso: string;
 }
 
 @Component({
   selector: 'app-alunos',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './alunos.component.html',
-  styleUrl: './alunos.component.scss',
+  styleUrls: ['./alunos.component.scss'],
 })
 export class AlunosComponent implements OnInit {
   alunos: Aluno[] = [
     {
-      id: 1,
-      nome: 'João Silva',
+      id: '1',
+      nomeCompleto: 'João Silva',
       cpf: '123.456.789-00',
       email: 'joao@example.com',
+      celular: '1111-1111',
       curso: 'Engenharia',
     },
     {
-      id: 2,
-      nome: 'Maria Souza',
+      id: '2',
+      nomeCompleto: 'Maria Souza',
       cpf: '987.654.321-00',
       email: 'maria@example.com',
+      celular: '2222-2222',
       curso: 'Administração',
-    },
-    {
-      id: 3,
-      nome: 'Renato Luz',
-      cpf: '134.567.658-99',
-      email: 'renato@example.com',
-      curso: 'Engenharia',
-    },
-    {
-      id: 4,
-      nome: 'Joana Souza',
-      cpf: '456.123.987-55',
-      email: 'joana@example.com',
-      curso: 'Administração',
-    },
-    {
-      id: 5,
-      nome: 'Lucas Souza',
-      cpf: '924.983.987-54',
-      email: 'lucas@example.com',
-      curso: 'Ciências da Computação',
     },
   ];
 
@@ -61,7 +43,31 @@ export class AlunosComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as {
+      novoAluno?: Aluno;
+      alunoEditado?: Aluno;
+    };
+
+    if (state && state.novoAluno) {
+      const novoAluno = {
+        ...state.novoAluno,
+        id: (this.alunos.length + 1).toString(),
+      };
+      this.alunos.push(novoAluno);
+    }
+
+    if (state && state.alunoEditado) {
+      const alunoEditado = state.alunoEditado;
+      const index = this.alunos.findIndex(
+        (aluno) => aluno.id === alunoEditado?.id
+      );
+      if (index !== -1 && alunoEditado) {
+        this.alunos[index] = alunoEditado;
+      }
+    }
+  }
 
   searchAlunos(): void {
     if (!this.termoPesquisa.trim()) {
@@ -69,34 +75,39 @@ export class AlunosComponent implements OnInit {
     } else {
       this.alunos = this.alunos.filter(
         (aluno) =>
-          aluno.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
+          aluno.nomeCompleto
+            .toLowerCase()
+            .includes(this.termoPesquisa.toLowerCase()) ||
           aluno.email.toLowerCase().includes(this.termoPesquisa.toLowerCase())
       );
     }
   }
 
   getAlunos(): void {
+    // Mock para exemplo
     setTimeout(() => {
       this.alunos = [
         {
-          id: 1,
-          nome: 'João Silva',
+          id: '1',
+          nomeCompleto: 'João Silva',
           cpf: '123.456.789-00',
           email: 'joao@example.com',
+          celular: '1111-1111',
           curso: 'Engenharia',
         },
         {
-          id: 2,
-          nome: 'Maria Souza',
+          id: '2',
+          nomeCompleto: 'Maria Souza',
           cpf: '987.654.321-00',
           email: 'maria@example.com',
+          celular: '2222-2222',
           curso: 'Administração',
         },
       ];
     }, 500);
   }
 
-  deleteAluno(id: number): void {
+  deleteAluno(id: string): void {
     if (confirm('Quer mesmo excluir este usuário?')) {
       const index = this.alunos.findIndex((aluno) => aluno.id === id);
       if (index !== -1) {
@@ -105,7 +116,11 @@ export class AlunosComponent implements OnInit {
     }
   }
 
-  editarAluno(id: number): void {
+  editarAluno(id: string): void {
     this.router.navigate(['/cadastro-aluno', id]);
+  }
+
+  excluirAluno(id: string): void {
+    this.deleteAluno(id);
   }
 }
